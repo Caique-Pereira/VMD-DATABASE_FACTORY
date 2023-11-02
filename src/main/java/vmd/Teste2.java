@@ -76,6 +76,17 @@ public class Teste2 {
 			config.QtdeCampos =0;
 			config.TamanhoTotal = 1;
 			
+			//produto_id+sequencia+tabela
+			
+			StringBuilder produto_id = preencherTipoStringValor("produto_id",50);
+			StringBuilder sequencia = preencherTipoStringValor("sequencia",50);
+			StringBuilder tabela = preencherTipoStringValor("tabela",50);
+			
+			
+			StringBuilder indice = new StringBuilder(produto_id.toString() +  sequencia.toString() + tabela.toString())  ;
+			
+			config.Indices[0] = indice;
+			
 			// a parte a cima deu tudo certo
 			
 			//TFields_New do vb
@@ -85,8 +96,8 @@ public class Teste2 {
 			TFields_New(config,"PRECO",Byte.valueOf("5"),Byte.valueOf("8"));
 			TFields_New(config,"ALTERADO",Byte.valueOf("1"),Byte.valueOf("1"));
 			TFields_New(config,"TIPO_PRECO",Byte.valueOf("2"),Byte.valueOf("1"));
-			//TFields_New(config,"DATA_INICIAL",Byte.valueOf("8"),Byte.valueOf("8"));
-			//TFields_New(config,"DATA_FINAL",Byte.valueOf("8"),Byte.valueOf("8"));
+			TFields_New(config,"DATA_INICIAL",Byte.valueOf("8"),Byte.valueOf("8"));
+			TFields_New(config,"DATA_FINAL",Byte.valueOf("8"),Byte.valueOf("8"));
 			
 			
 			//inserir dados das tabelas 
@@ -97,12 +108,28 @@ public class Teste2 {
 			//TFields_SetNew(buffer,config,5,  false);
 			//TFields_SetNew(buffer,config,6, (byte)1);
 			//TFields_SetNew(buffer,config,0,  (byte)1);
+			//12371
 			
 			
+			ByteBuffer bufferDados = ByteBuffer.allocate(38);
+			buffer.order(ByteOrder.LITTLE_ENDIAN);
+			for (int i = 0; i < buffer.capacity(); i++) {
+			    buffer.put((byte) ' ');
+			}
+			buffer.rewind();  // Para retornar a posição do buffer ao início
+			
+			buffer.putDouble(1, 1);
+			buffer.put(9,(byte)1);
+			buffer.put(10,(byte)1);
+			buffer.putLong(11,(1L * 10000));
+			buffer.putShort(19,  (short) (false ? 1 : 0));
+			buffer.put(21, (byte)1);
+			buffer.put(0, (byte)1);
 			
 			
 			ProcessadorVmd processadorVmd = new ProcessadorVmd(config);
-			processadorVmd.gerarData();
+			processadorVmd.gerarData(buffer);
+			
 			//Processador2 processador2 = new Processador2(config,buffer);
 			//processador2.gerarData();		
 			

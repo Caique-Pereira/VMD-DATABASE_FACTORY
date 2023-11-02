@@ -10,7 +10,7 @@ public class teste3InsercaoDevalores {
 	public static void main(String[] args) throws IOException {
 		
 		StringBuilder fixedLengthString = preencherTipoStringValor("", 10000);
-		ByteBuffer buffer = ByteBuffer.allocate(22);
+		ByteBuffer buffer = ByteBuffer.allocate(38);
 		buffer.order(ByteOrder.LITTLE_ENDIAN);
 		
         BigDecimal dinheiro = new BigDecimal(1);
@@ -28,11 +28,9 @@ public class teste3InsercaoDevalores {
 		buffer.put(21, (byte)1);
 		buffer.put(0, (byte)1);
 		
-	
-		
+		//12371
 		Processador2 processador2 = new Processador2(buffer);
 		processador2.gerarData();
-		
 	}
 	
 	

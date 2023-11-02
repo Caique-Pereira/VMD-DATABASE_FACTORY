@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 
 public class ProcessadorVmd {
 
@@ -16,10 +17,10 @@ public class ProcessadorVmd {
 		
 	}
 	
-	public void gerarData() throws FileNotFoundException, IOException {
+	public void gerarData(ByteBuffer bufferDados) throws FileNotFoundException, IOException {
 		
 		
-		try (FileOutputStream fos = new FileOutputStream(file = new File("C:\\VisualStore\\lj000001\\vmix\\dataisp\\linux\\produtos\\java.vmd"))) {
+		try (FileOutputStream fos = new FileOutputStream(file = new File("C:\\VisualStore\\lj000001\\vmix\\dataisp\\linux\\prodtemp\\java.vmd"))) {
 			escritor = new Escritor(fos);
 			
 			escritor.escreverLong(config.RegistroAtual);
@@ -40,6 +41,15 @@ public class ProcessadorVmd {
 		   for (int i = 0; i <= 9; i++) {
 			   escritor.escreverByte(config.ChaveDuplicada[i]);
 			   }
+		   
+		   //config sempre tem que ter o tamanho de 12371, depois desse valor vem os dados
+		   
+		   escritor.escreverBytes(bufferDados.array());
+		   
+		   
+		   
+		   
+		   
 		   
 		   
 		   fos.close();
