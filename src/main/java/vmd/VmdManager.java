@@ -5,8 +5,21 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 
-public class Teste2 {
+public class VmdManager{
 
+	
+	/*
+	 * ---VB---  |---JAVA--- 
+	 *  Double   |  Double
+	 *  Int      |  Short 
+	 *  Long     | Integer
+	 * Currency  | buffer.putLong(11,(1L * 10000)); 
+	 *  String   | A definir como vai ser feito
+	 *  Date     | A definir como vai ser feito
+	 *  Byte     | Byte
+	 *  Logico   | putShort(x,  (short) (false ? 1 : 0));
+	 *           |
+	 */
 	
 	public static void main(String[] args) throws IOException {
 		
@@ -118,6 +131,8 @@ public class Teste2 {
 			}
 			buffer.rewind();  // Para retornar a posição do buffer ao início
 			
+			
+			//inserção dos valores
 			buffer.putDouble(1, 1);
 			buffer.put(9,(byte)1);
 			buffer.put(10,(byte)1);

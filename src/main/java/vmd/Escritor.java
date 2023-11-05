@@ -4,9 +4,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Escritor {
 	
@@ -73,6 +70,13 @@ public class Escritor {
 	     fos.write(buffer.array());
 		}
 	
+	
+	public void escreverDouble(Double a) throws IOException {
+		ByteBuffer buffer = ByteBuffer.allocate(8);  // Aloca 1 byte
+		buffer.order(ByteOrder.LITTLE_ENDIAN);
+		buffer.putDouble(a);  // Coloca um byte vazio (0x00)
+	    fos.write(buffer.array()); 
+		}
 	
 	  
 	
